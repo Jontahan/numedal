@@ -48,16 +48,16 @@ def env_diff(env_a, env_b, iterations, step_size):
     absolutely_all_diffs.append(all_mean_diffs)
     return all_mean_diffs[-1]
 
+#envs = [
+#    (Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(0, 3), (3, 3)]),
+#     Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(1, 3), (3, 3)]))
+#]
 
-envs = [
-    (Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(0, 3), (3, 3)]),
-     Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(1, 3), (3, 3)]))
-]
+#for env_pair in envs:
+#    print(env_diff(env_pair[0], env_pair[1], 10, 10))
 
-for env_pair in envs:
-    print(env_diff(env_pair[0], env_pair[1], 10, 10))
+#for diff in absolutely_all_diffs:
+#    plt.plot(diff)
 
-for diff in absolutely_all_diffs:
-    plt.plot(diff)
 #plt.savefig('test.png')
 #plt.show()
