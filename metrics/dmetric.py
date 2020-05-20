@@ -1,16 +1,16 @@
 from .value_diff_function import *
 import time
 
-def get_diversity(env_list, training_iterations=1000):
+def get_diversity(env_list, training_iterations=1000, verbose=False):
     dqn_list = []
     
     for i in range(len(env_list)):
         dqn = DQN(env_list[i], qnet=LinRegNet(64, 4).double(), plotter=None, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.3)
-        print('Training value function for environment({}) {}/{}'.format(env_list[i].seed, i + 1, len(env_list)))
+        if verbose: print('Training value function for environment({}) {}/{}'.format(env_list[i].seed, i + 1, len(env_list)))
         start = time.time()
         dqn.train(training_iterations, 4)
         end = time.time()
-        print('Elapsed time: {:.2f}s'.format(end - start))
+        if verbose: print('Elapsed time: {:.2f}s'.format(end - start))
         dqn_list.append(dqn)
     
     diff_list = []
@@ -31,5 +31,4 @@ def get_diversity(env_list, training_iterations=1000):
 
             diff_list.append(np.mean(env_diffs))
     
-    
-    return diff_list
+    return [np.mean(diff_list)]

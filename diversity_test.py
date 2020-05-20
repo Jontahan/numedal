@@ -1,12 +1,12 @@
 from metrics.dmetric import *
+from util.experiment import Experiment
 
-for base in range(10):
+for base in range(1, 100):
+    exp = Experiment('diversity_set_size_10_offset_{}_3k'.format(base))
+
     env_list = []
 
-    for i in [100 + base * 5, 101 + base * 5, 102 + base * 5, 103 + base * 5, 104 + base * 5]:
-        env_list.append(Gridworld(width=4, height=4, cell_size=32, seed=i))
+    for i in range(10):
+        env_list.append(Gridworld(width=4, height=4, cell_size=32, seed=(10 * base + i)))
 
-    for _ in range(1):
-        diversity_list = get_diversity(env_list, training_iterations=5000)
-        diversity = np.mean(diversity_list)
-        print('base={}, diversity={}'.format(base, diversity))
+    exp.run(get_diversity, params={ 'env_list' : env_list, 'training_iterations' : 3000 }, k=4)
