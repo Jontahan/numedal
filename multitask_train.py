@@ -32,14 +32,17 @@ histories_a = []
 
 env_list = []
 
-for i in [8, 0, 2, 4, 7]:
-    env_list.append(Gridworld(width=4, height=4, cell_size=32, seed=i))
+
+for i in range(10):
+    env_list.append(Gridworld(width=4, height=4, cell_size=32, seed=(20 + i)))
+#for i in [8, 0, 2, 4, 7]:
+#    env_list.append(Gridworld(width=4, height=4, cell_size=32, seed=i))
 
 env = MultitaskEnvironment(env_list)
 
 for _ in range(repetitions):
     print('x')
-    dqn = DQN(env, qnet=LinRegNet(64, 4).double(), plotter=None, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.1, plot_durations=True)
+    dqn = DQN(env, qnet=NeuralNet(64, 4).double(), plotter=plot, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.1, plot_durations=True)
     dqn.train(training_iterations, 4, plot=False)
     histories_a.append(dqn.history)
 
@@ -58,7 +61,7 @@ env = MultitaskEnvironment(env_list)
 
 for _ in range(repetitions):
     print('x')
-    dqn = DQN(env, qnet=LinRegNet(64, 4).double(), plotter=None, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.1, plot_durations=True)
+    dqn = DQN(env, qnet=LinRegNet(64, 4).double(), plotter=plot, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.1, plot_durations=True)
     dqn.train(training_iterations, 4, plot=False)
     histories_b.append(dqn.history)
 

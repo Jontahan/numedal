@@ -50,7 +50,7 @@ def env_diff(env_a, env_b, iterations, step_size):
 
 envs = [
     (Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(1, 3), (3, 3)]),
-     Gridworld(width=4, height=4, cell_size=32, agent_pos=(2, 0), food_pos=[(1, 3), (3, 3)]))
+     Gridworld(width=4, height=4, cell_size=32, agent_pos=(0, 0), food_pos=[(1, 3), (3, 3)]))
 ]
 
 for env_pair in envs:

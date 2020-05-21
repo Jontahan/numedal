@@ -22,7 +22,7 @@ class LinRegNet(nn.Module):
 
 class NeuralNet(nn.Module):
     def __init__(self, n_inputs, n_outputs):
-        super(LinRegNet, self).__init__()
+        super(NeuralNet, self).__init__()
         self.fc1 = nn.Linear(n_inputs, 32)
         self.fc2 = nn.Linear(32, n_outputs)
 
