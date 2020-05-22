@@ -7,6 +7,9 @@ class Experiment:
         self.name = name
         self.dry = dry
         if not dry:
+            if not os.path.exists('out'):
+                os.mkdir('out')
+        
             for ds in os.walk('out'):
                 if ds[0].split('/')[-1] == self.name:
                     ans = ''
