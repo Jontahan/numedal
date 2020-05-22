@@ -11,14 +11,14 @@ class LinRegNet(nn.Module):
         x = torch.flatten(x)
         return self.linreg(x)
 
-class LinRegNet(nn.Module):
+class LogRegNet(nn.Module):
     def __init__(self, n_inputs, n_outputs):
-        super(LinRegNet, self).__init__()
+        super(LogRegNet, self).__init__()
         self.linreg = nn.Linear(n_inputs, n_outputs)
 
     def forward(self, x):
         x = torch.flatten(x)
-        return self.linreg(x)
+        return F.softmax(self.linreg(x), dim=-1)
 
 class NeuralNet(nn.Module):
     def __init__(self, n_inputs, n_outputs):
