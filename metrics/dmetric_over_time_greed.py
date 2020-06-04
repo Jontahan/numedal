@@ -34,7 +34,7 @@ def get_diversity(env_list, training_iterations=100, steps=10, verbose=False, in
 
                 for state in all_states:
                     state = torch.from_numpy(state)
-                    env_diffs.append(torch.sum((dqn_a.qnet(state) - dqn_b.qnet(state)) ** 2).item())
+                    env_diffs.append(torch.sum((F.softmax(dqn_a.qnet(state), dim=-1) - F.softmax(dqn_b.qnet(state), dim=-1)) ** 2).item())
 
                 diff_list.append(np.mean(env_diffs))
         

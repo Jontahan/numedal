@@ -1,11 +1,11 @@
 from .value_diff_function import *
 import time
 
-def get_diversity(env_list, training_iterations=100, steps=10, verbose=False, input_size=64):
+def get_diversity(env_list, training_iterations=100, steps=10, verbose=False):
     dqn_list = []
 
     for i in range(len(env_list)):
-        dqn = DQN(env_list[i], qnet=LinRegNet(input_size, 4).double(), plotter=None, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.3)
+        dqn = DQN(env_list[i], qnet=LinRegNet(64, 4).double(), plotter=None, render=False, memory_length=2000, gamma=.99, alpha=.001, epsilon_start=0.3)
         dqn_list.append(dqn)
     
     diversity_history = []
@@ -29,7 +29,8 @@ def get_diversity(env_list, training_iterations=100, steps=10, verbose=False, in
                 dqn_b = dqn_list[j]
                 
                 all_states = env_a.get_all_states() + env_b.get_all_states()
-                
+                #all_states = [sample[0].numpy() for sample in dqn_a.memory] + [sample[0].numpy() for sample in dqn_b.memory]
+
                 env_diffs = []
 
                 for state in all_states:
